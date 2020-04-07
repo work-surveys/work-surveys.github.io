@@ -48,9 +48,13 @@
 				iframe.width = json.Width;
 				iframe.height = json.Height;
 				iframe.style.border = 'none';
-				var loc = window.location.toString();
-				var params = loc.split('?')[1];
-				iframe.src = json.Url + '&' + params;
+				if (loc.includes('?')){
+					var loc = window.location.toString();
+					var params = loc.split('?')[1];
+					iframe.src = json.Url + '&' + params;
+				}else {
+					iframe.src = json.Url
+				}
 				document.getElementById('embed-enalyzer').appendChild(iframe);
 				break;
 			case 'Button':
