@@ -50,10 +50,18 @@
 				iframe.style.border = 'none';
 				var loc = window.location.toString();
 				if (loc.includes('?')){
-					var params = loc.split('?')[1];
-					iframe.src = json.Url + '&' + params;
+				  var params = loc.split('?')[1];
+				  //if survey id is passed in, remove the default one
+				  if (params.includes('pid=')){
+				    const baseUrl = json.Url.split('pid=')[0]
+				    //copy all passed in parameters
+				    iframe.src = baseUrl + params
+				  }else {
+			            //preserve passed in paramaters
+				    iframe.src = json.Url + '&' + params;
+				  }
 				}else {
-					iframe.src = json.Url
+				    iframe.src = json.Url
 				}
 				document.getElementById('embed-enalyzer').appendChild(iframe);
 				break;
